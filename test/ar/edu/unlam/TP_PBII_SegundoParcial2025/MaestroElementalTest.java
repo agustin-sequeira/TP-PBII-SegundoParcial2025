@@ -2,6 +2,8 @@ package ar.edu.unlam.TP_PBII_SegundoParcial2025;
 
 import static org.junit.Assert.*;
 
+import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.Criatura;
+import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.CriaturaAncestral;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.CriaturaDomesticada;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.CriaturaElemental;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.AfinidadElemental;
@@ -25,6 +27,19 @@ public class MaestroElementalTest {
 		syl.entrenarCriatura(brisa.getNombre(), 10);
 		
 		assertEquals(50, brisa.getNivelDeEnergia());
+	}
+	
+	@Test
+	public void puedoRegistrarYObtenerUnaCriatura() {
+		MaestroElemental miMaestro = new MaestroElemental("Maestro Yoda", 25, AfinidadElemental.AIRE);
+		Criatura miCriatura = new CriaturaAncestral("Charizard", 100, AfinidadElemental.FUEGO, EstadoEmocional.INSTABLE);
+		
+		miMaestro.registrarCriatura(miCriatura);
+		String criaturaEsperada = miMaestro.obtenerCriatura("Charizard").getNombre();
+		
+		assertEquals("Charizard", criaturaEsperada);
+		
+		
 	}
 
 }
