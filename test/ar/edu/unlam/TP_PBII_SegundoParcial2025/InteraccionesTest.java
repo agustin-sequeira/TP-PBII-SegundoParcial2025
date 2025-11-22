@@ -44,4 +44,28 @@ public class InteraccionesTest {
 		assertEquals(160, ancestral.getNivelDeEnergia());
 		assertEquals(15, otra.getNivelDeEnergia());
 	}
+	
+	@Test
+	public void aireYTierraSeVuelvenInestablesSinCambiarEnergia() {
+		CriaturaElemental aire = new CriaturaDomesticada("Brisa", 30, AfinidadElemental.AIRE, EstadoEmocional.TRANQUILA);
+		CriaturaElemental tierra = new CriaturaSalvaje("Roca", 90, AfinidadElemental.TIERRA, EstadoEmocional.INSTABLE);
+		
+		InteraccionEntreCriaturas.interactuar(aire, tierra);
+		
+		assertTrue(aire.esInestable());
+		assertTrue(tierra.esInestable());
+		assertEquals(30, aire.getNivelDeEnergia());
+		assertEquals(90, tierra.getNivelDeEnergia());
+	}
+	
+	@Test
+	public void tierraYAireOpuestosTambienSeDetectanEnOrdenInvertido() {
+		CriaturaElemental tierra = new CriaturaDomesticada("Mole", 55, AfinidadElemental.TIERRA, EstadoEmocional.TRANQUILA);
+		CriaturaElemental aire = new CriaturaDomesticada("Alisio", 65, AfinidadElemental.AIRE, EstadoEmocional.TRANQUILA);
+		
+		InteraccionEntreCriaturas.interactuar(tierra, aire);
+		
+		assertTrue(tierra.esInestable());
+		assertTrue(aire.esInestable());
+	}
 }

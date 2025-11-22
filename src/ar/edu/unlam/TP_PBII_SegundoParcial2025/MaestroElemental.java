@@ -37,7 +37,10 @@ public class MaestroElemental {
 		return criaturasACargo.get(nombre);
 	}
 	
-	public void entrenarCriatura(String nombreCriatura, int intensidad)  {
+	public void entrenarCriatura(String nombreCriatura, int intensidad) throws MaestriaInsuficienteException {
+		if (this.nivelDeMaestria < intensidad)
+			throw new MaestriaInsuficienteException("Nivel insuficiente para entrenar con esa intensidad");
+
 		CriaturaElemental criatura = criaturasACargo.get(nombreCriatura);
 		if (criatura != null)
 			criatura.entrenar(intensidad);

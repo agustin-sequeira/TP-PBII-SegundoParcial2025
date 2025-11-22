@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.*;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.AfinidadElemental;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.EstadoEmocional;
+import ar.edu.unlam.TP_PBII_SegundoParcial2025.exception.EnergiaDesbordadaException;
+
 import org.junit.Test;
 
 public class CriaturaTest {
@@ -50,4 +52,9 @@ public class CriaturaTest {
 		assertEquals(100, ancestral.getNivelDeEnergia());
 	}
 
+	@Test(expected = EnergiaDesbordadaException.class)
+	public void laCriaturaSalvajeNoPuedeSuperarDoscientosDeEnergia() {
+		CriaturaElemental salvaje = new CriaturaSalvaje("Stormfang", 150, AfinidadElemental.FUEGO, EstadoEmocional.INSTABLE);
+		salvaje.entrenar(30);
+	}
 }

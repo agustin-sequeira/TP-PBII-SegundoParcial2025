@@ -6,6 +6,7 @@ import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.CriaturaDomesticada;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.CriaturaElemental;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.AfinidadElemental;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.EstadoEmocional;
+import ar.edu.unlam.TP_PBII_SegundoParcial2025.exception.MaestriaInsuficienteException;
 import org.junit.Test;
 
 public class MaestroElementalTest {
@@ -17,7 +18,7 @@ public class MaestroElementalTest {
 	}
 
 	@Test
-	public void elMaestroEntrenaSegunSuNivelDeMaestria() {
+	public void elMaestroEntrenaSegunSuNivelDeMaestria() throws MaestriaInsuficienteException {
 		MaestroElemental syl = new MaestroElemental("Maestra Syl", 15, AfinidadElemental.AIRE);
 		CriaturaElemental brisa = new CriaturaDomesticada("Brisa", 40, AfinidadElemental.AIRE, EstadoEmocional.TRANQUILA);
 		syl.registrarCriatura(brisa);
