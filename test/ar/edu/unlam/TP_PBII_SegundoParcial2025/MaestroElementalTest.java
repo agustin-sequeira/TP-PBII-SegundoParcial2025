@@ -27,5 +27,14 @@ public class MaestroElementalTest {
 		
 		assertEquals(50, brisa.getNivelDeEnergia());
 	}
+	
+	@Test(expected = MaestriaInsuficienteException.class)
+	public void lanzaMaestriaInsuficienteCuandoLaIntensidadSuperaElNivel() throws MaestriaInsuficienteException {
+		MaestroElemental novato = new MaestroElemental("Novato", 5, AfinidadElemental.AGUA);
+		CriaturaElemental pez = new CriaturaDomesticada("Pez", 20, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
+		novato.registrarCriatura(pez);
+		
+		novato.entrenarCriatura(pez.getNombre(), 8);
+	}
 
 }
