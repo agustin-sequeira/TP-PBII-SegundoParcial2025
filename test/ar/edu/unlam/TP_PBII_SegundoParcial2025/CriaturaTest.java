@@ -17,13 +17,13 @@ public class CriaturaTest {
 
 	@Test
 	public void creacionDeMiCriaturaDomesticada() {
-		Criatura miCriatura = new CriaturaDomesticada("Charizard", 100, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
+		Criatura miCriatura = new CriaturaDomesticada("Bulbasaur", 100, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
 		assertNotNull(miCriatura);
 	}
 
 	@Test
 	public void creacionDeMiCriaturaAncestral() {
-		Criatura miCriatura = new CriaturaAncestral("Charizard", 100, AfinidadElemental.TIERRA, EstadoEmocional.TRANQUILA);
+		Criatura miCriatura = new CriaturaAncestral("Ancestro", 100, AfinidadElemental.TIERRA, EstadoEmocional.TRANQUILA);
 		assertNotNull(miCriatura);
 	}
 

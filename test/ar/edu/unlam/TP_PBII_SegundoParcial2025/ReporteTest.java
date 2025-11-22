@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.Criatura;
@@ -19,58 +20,59 @@ import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.AfinidadElemental;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.EstadoEmocional;
 
 public class ReporteTest {
+	
+	private CriaturaElemental charizard;
+	private CriaturaElemental coral;
+	private CriaturaElemental ancestro;
+	
+	private MaestroElemental yoda;
+	private MaestroElemental syl;
+	
+	private Reporte reporte;
+	private List<MaestroElemental> maestros;
+
+	
+	@Before
+	public void setUp() throws Exception {
+		charizard = new CriaturaSalvaje("Charizard", 100, AfinidadElemental.FUEGO, EstadoEmocional.INSTABLE);
+		coral = new CriaturaDomesticada("Coral", 50, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
+		ancestro = new CriaturaAncestral("Ancestro", 120, AfinidadElemental.TIERRA, EstadoEmocional.TRANQUILA);
+		
+		yoda = new MaestroElemental("Maestro Yoda", 25, AfinidadElemental.AIRE);
+		syl = new MaestroElemental("Maestra Syl", 15, AfinidadElemental.AIRE);
+		
+		reporte = new Reporte();
+		maestros = new ArrayList();
+		maestros.add(yoda);
+		maestros.add(syl);
+	}
 
 	@Test
 	public void registraYDevuelveListadoDeCriaturasDeLosMaestros() {
-		Criatura miCriatura = new CriaturaSalvaje("Charizard", 100, AfinidadElemental.FUEGO, EstadoEmocional.INSTABLE);
-		Criatura domesticada = new CriaturaDomesticada("Coral", 50, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
-		Criatura ancestral = new CriaturaAncestral("Ancestro", 120, AfinidadElemental.TIERRA, EstadoEmocional.TRANQUILA);
 		
-		MaestroElemental miMaestro = new MaestroElemental("Maestro Yoda", 25, AfinidadElemental.AIRE);
-		MaestroElemental syl = new MaestroElemental("Maestra Syl", 15, AfinidadElemental.AIRE);
+		yoda.registrarCriatura(charizard);
+		syl.registrarCriatura(coral);
+		syl.registrarCriatura(ancestro);
 		
-		miMaestro.registrarCriatura(miCriatura);
-		syl.registrarCriatura(domesticada);
-		syl.registrarCriatura(ancestral);
-		
-		List<MaestroElemental> maestros = new ArrayList();
-		maestros.add(miMaestro);
-		maestros.add(syl);
-		
-		Reporte miReporte = new Reporte();
-		
-		List<CriaturaElemental> criaturas = miReporte.listadoTotalDeCriaturas(maestros);
+		List<CriaturaElemental> criaturas = reporte.listadoTotalDeCriaturas(maestros);
 		
 		
 		assertEquals(3, criaturas.size());
-		assertTrue(criaturas.contains(miCriatura));
-		assertTrue(criaturas.contains(domesticada));
-		assertTrue(criaturas.contains(ancestral));
+		assertTrue(criaturas.contains(charizard));
+		assertTrue(criaturas.contains(coral));
+		assertTrue(criaturas.contains(ancestro));
 		
 		
 	}
 	
 	@Test
 	public void registraYDevuelveLaCriaturaConMayorEnergiaTotal() {
-		Criatura miCriatura = new CriaturaSalvaje("Charizard", 100, AfinidadElemental.FUEGO, EstadoEmocional.INSTABLE);
-		Criatura domesticada = new CriaturaDomesticada("Coral", 50, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
-		Criatura ancestral = new CriaturaAncestral("Ancestro", 120, AfinidadElemental.TIERRA, EstadoEmocional.TRANQUILA);
 		
-		MaestroElemental miMaestro = new MaestroElemental("Maestro Yoda", 25, AfinidadElemental.AIRE);
-		MaestroElemental syl = new MaestroElemental("Maestra Syl", 15, AfinidadElemental.AIRE);
+		yoda.registrarCriatura(charizard);
+		syl.registrarCriatura(coral);
+		syl.registrarCriatura(ancestro);
 		
-		miMaestro.registrarCriatura(miCriatura);
-		syl.registrarCriatura(domesticada);
-		syl.registrarCriatura(ancestral);
-		
-		List<MaestroElemental> maestros = new ArrayList();
-		maestros.add(miMaestro);
-		maestros.add(syl);
-		
-		Reporte miReporte = new Reporte();
-		
-		
-		CriaturaElemental criaturaConMayorEnergia = miReporte.devuelveCriaturaConMayorEnergiaTotal(maestros);
+		CriaturaElemental criaturaConMayorEnergia = reporte.devuelveCriaturaConMayorEnergiaTotal(maestros);
 		
 		assertEquals(120, criaturaConMayorEnergia.getNivelDeEnergia());
 	
@@ -79,49 +81,30 @@ public class ReporteTest {
 	
 	@Test
 	public void devuelveMaestroConMasCriaturasTransformadas() {
-		Criatura domesticada = new CriaturaDomesticada("Coral", 50, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
-		Criatura ancestral = new CriaturaAncestral("Ancestro", 120, AfinidadElemental.TIERRA, EstadoEmocional.TRANQUILA);
 		
-		MaestroElemental miMaestro = new MaestroElemental("Maestro Yoda", 25, AfinidadElemental.AIRE);
-		MaestroElemental syl = new MaestroElemental("Maestra Syl", 15, AfinidadElemental.AGUA);
+		yoda.registrarCriatura(coral);
+		yoda.registrarCriatura(ancestro);
+		syl.registrarCriatura(charizard);
 		
-		miMaestro.registrarCriatura(domesticada);
-		syl.registrarCriatura(ancestral);
+		yoda.aplicarBendicionDelRio(coral.getNombre());
+		yoda.aplicarLlamaInterna(ancestro.getNombre());
+		syl.aplicarAscensoDelViento(charizard.getNombre());
 		
-		miMaestro.aplicarBendicionDelRio(domesticada.getNombre());
-		miMaestro.aplicarLlamaInterna(ancestral.getNombre());
+		MaestroElemental resultado = reporte.maestroConMasCriaturasTransformadas(maestros);
 		
-		
-		Reporte miReporte = new Reporte();
-		
-		List<MaestroElemental> maestros = new ArrayList();
-		maestros.add(miMaestro);
-		maestros.add(syl);
-		MaestroElemental resultado = miReporte.maestroConMasCriaturasTransformadas(maestros);
-		
-		assertEquals(miMaestro, resultado);
+		assertEquals(yoda, resultado);
 	
 		
 	}
 	
 	@Test
 	public void devuelveCantidadDeCriaturasPorAfinidadElemental() {
-		Criatura miCriatura = new CriaturaSalvaje("Charizard", 100, AfinidadElemental.FUEGO, EstadoEmocional.INSTABLE);
-		Criatura domesticada = new CriaturaDomesticada("Coral", 50, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
-		Criatura ancestral = new CriaturaAncestral("Ancestro", 120, AfinidadElemental.TIERRA, EstadoEmocional.TRANQUILA);
 		
-		MaestroElemental miMaestro = new MaestroElemental("Maestro Yoda", 25, AfinidadElemental.AIRE);
-		MaestroElemental syl = new MaestroElemental("Maestra Syl", 15, AfinidadElemental.AGUA);
+		yoda.registrarCriatura(charizard);
+		yoda.registrarCriatura(coral);
+		syl.registrarCriatura(ancestro);
 		
-		miMaestro.registrarCriatura(miCriatura);
-		miMaestro.registrarCriatura(domesticada);
-		syl.registrarCriatura(ancestral);
-		
-		Reporte miReporte = new Reporte();
-		List<MaestroElemental> maestros = new ArrayList();
-		maestros.add(miMaestro);
-		maestros.add(syl);
-		HashMap<AfinidadElemental, Integer> mapa = miReporte.cantidadDeCriaturasPorAfinidad(maestros);
+		HashMap<AfinidadElemental, Integer> mapa = reporte.cantidadDeCriaturasPorAfinidad(maestros);
 		
 		assertEquals(1, (int) mapa.get(AfinidadElemental.FUEGO));
 		assertEquals(1, (int) mapa.get(AfinidadElemental.AGUA));
