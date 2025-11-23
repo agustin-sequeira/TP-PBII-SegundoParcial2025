@@ -31,7 +31,7 @@ public class MaestroElementalTest {
 	}
 
 	@Test
-	public void elMaestroEntrenaSegunSuNivelDeMaestria() {
+	public void elMaestroEntrenaSegunSuNivelDeMaestria() throws MaestriaInsuficienteException{
 		
 		syl.registrarCriatura(brisa);
 
