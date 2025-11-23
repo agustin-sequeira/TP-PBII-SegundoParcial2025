@@ -2,6 +2,7 @@ package ar.edu.unlam.TP_PBII_SegundoParcial2025;
 
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.CriaturaElemental;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.AfinidadElemental;
+import ar.edu.unlam.TP_PBII_SegundoParcial2025.exception.MaestriaInsuficienteException;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.transformacion.AscensoDelViento;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.transformacion.BendicionDelRio;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.transformacion.LlamaInterna;
@@ -36,52 +37,48 @@ public class MaestroElemental {
 		return criaturasACargo.get(nombre);
 	}
 	
-	public void entrenarCriatura(String nombreCriatura, int intensidad)  {
+	public void entrenarCriatura(String nombreCriatura, int intensidad) throws MaestriaInsuficienteException {
+		if (this.nivelDeMaestria < intensidad)
+			throw new MaestriaInsuficienteException("Nivel insuficiente para entrenar con esa intensidad");
+
 		CriaturaElemental criatura = criaturasACargo.get(nombreCriatura);
-		if (criatura != null) {
+		if (criatura != null)
 			criatura.entrenar(intensidad);
-		}
 	}
 	
 	public void pacificarCriatura(String nombreCriatura) {
 		CriaturaElemental criatura = criaturasACargo.get(nombreCriatura);
-		if (criatura != null) {
+		if (criatura != null)
 			criatura.pacificar();
-		}
 	}
 	
 	public void aplicarBendicionDelRio(String nombreCriatura) {
 		CriaturaElemental criatura = criaturasACargo.get(nombreCriatura);
-		if (criatura != null) {
+		if (criatura != null)
 			reemplazarCriatura(nombreCriatura, new BendicionDelRio(criatura));
-		}
 	}
 	
 	public void aplicarLlamaInterna(String nombreCriatura) {
 		CriaturaElemental criatura = criaturasACargo.get(nombreCriatura);
-		if (criatura != null) {
+		if (criatura != null)
 			reemplazarCriatura(nombreCriatura, new LlamaInterna(criatura));
-		}
 	}
 	
 	public void aplicarVinculoTerrestre(String nombreCriatura) {
 		CriaturaElemental criatura = criaturasACargo.get(nombreCriatura);
-		if (criatura != null) {
+		if (criatura != null)
 			reemplazarCriatura(nombreCriatura, new VinculoTerrestre(criatura));
-		}
 	}
 	
 	public void aplicarAscensoDelViento(String nombreCriatura) {
 		CriaturaElemental criatura = criaturasACargo.get(nombreCriatura);
-		if (criatura != null) {
+		if (criatura != null)
 			reemplazarCriatura(nombreCriatura, new AscensoDelViento(criatura));
-		}
 	}
 	
 	private void reemplazarCriatura(String nombre, CriaturaElemental nueva) {
-		if (nombre != null && criaturasACargo.containsKey(nombre) && nueva != null) {
+		if (nombre != null && criaturasACargo.containsKey(nombre) && nueva != null)
 			criaturasACargo.put(nombre, nueva);
-		}
 	}
 	
 	public int contarCriaturasTransformadas() {

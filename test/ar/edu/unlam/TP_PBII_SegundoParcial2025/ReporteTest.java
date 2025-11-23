@@ -1,7 +1,6 @@
 package ar.edu.unlam.TP_PBII_SegundoParcial2025;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;

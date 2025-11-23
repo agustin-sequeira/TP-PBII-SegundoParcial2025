@@ -8,6 +8,7 @@ import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.CriaturaDomesticada;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.criatura.CriaturaElemental;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.AfinidadElemental;
 import ar.edu.unlam.TP_PBII_SegundoParcial2025.enumerable.EstadoEmocional;
+import ar.edu.unlam.TP_PBII_SegundoParcial2025.exception.MaestriaInsuficienteException;
 import org.junit.Test;
 
 public class MaestroElementalTest {
@@ -37,6 +38,15 @@ public class MaestroElementalTest {
 		syl.entrenarCriatura(brisa.getNombre(), 10);
 		
 		assertEquals(50, brisa.getNivelDeEnergia());
+	}
+	
+	@Test(expected = MaestriaInsuficienteException.class)
+	public void lanzaMaestriaInsuficienteCuandoLaIntensidadSuperaElNivel() throws MaestriaInsuficienteException {
+		MaestroElemental novato = new MaestroElemental("Novato", 5, AfinidadElemental.AGUA);
+		CriaturaElemental pez = new CriaturaDomesticada("Pez", 20, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
+		novato.registrarCriatura(pez);
+		
+		novato.entrenarCriatura(pez.getNombre(), 8);
 	}
 
 }

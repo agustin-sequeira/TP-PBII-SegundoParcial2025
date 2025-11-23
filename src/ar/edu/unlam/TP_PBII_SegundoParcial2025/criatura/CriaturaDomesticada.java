@@ -9,6 +9,12 @@ public class CriaturaDomesticada extends Criatura {
 			EstadoEmocional estadoEmocional) {
 		super(nombre, nivelDeEnergia, afinidadElemental, estadoEmocional);
 	}
+	
+	@Override
+	public void volverInestable() {
+		// Las domesticadas no se vuelven inestables según enunciado.
+		this.estadoEmocional = EstadoEmocional.TRANQUILA;
+	}
 
 	@Override
 	public void entrenar(int intensidad) {
