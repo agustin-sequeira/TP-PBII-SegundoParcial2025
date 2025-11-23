@@ -30,7 +30,7 @@ public class InteraccionesTest {
 		
 		InteraccionEntreCriaturas.interactuar(agua, fuego);
 		
-		assertTrue(agua.esInestable());
+		assertFalse(agua.esInestable()); // domesticada permanece tranquila
 		assertTrue(fuego.esInestable());
 	}
 	
@@ -52,7 +52,7 @@ public class InteraccionesTest {
 		
 		InteraccionEntreCriaturas.interactuar(aire, tierra);
 		
-		assertTrue(aire.esInestable());
+		assertFalse(aire.esInestable()); // domesticada no cambia a inestable
 		assertTrue(tierra.esInestable());
 		assertEquals(30, aire.getNivelDeEnergia());
 		assertEquals(90, tierra.getNivelDeEnergia());
@@ -65,7 +65,7 @@ public class InteraccionesTest {
 		
 		InteraccionEntreCriaturas.interactuar(tierra, aire);
 		
-		assertTrue(tierra.esInestable());
-		assertTrue(aire.esInestable());
+		assertFalse(tierra.esInestable());
+		assertFalse(aire.esInestable());
 	}
 }

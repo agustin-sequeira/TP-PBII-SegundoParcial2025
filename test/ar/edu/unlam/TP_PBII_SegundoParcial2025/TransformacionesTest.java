@@ -32,7 +32,7 @@ public class TransformacionesTest {
 		
 		CriaturaElemental baseAgua = new CriaturaDomesticada("Nereida", 80, AfinidadElemental.AGUA, EstadoEmocional.TRANQUILA);
 		CriaturaElemental resultadoAgua = new LlamaInterna(baseAgua);
-		assertTrue(resultadoAgua.esInestable());
+		assertFalse(resultadoAgua.esInestable()); // domesticada no se vuelve inestable
 	}
 	
 	@Test
